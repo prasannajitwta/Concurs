@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="setup">
+        <h3>Azure Configuration</h3>
+        <input id="endpoint" placeholder="Azure Endpoint" />
+        <input id="deployment" placeholder="Deployment Name" />
+        <input id="version" placeholder="API Version" />
+        <input id="key" type="password" placeholder="API Key" />
+        <button onclick="save()">Save</button>
+    </div>
+
+    <div id="chat" style="display: none;">
+        <h3>Concur Chat ✅</h3>
+        
+        <div id="contextFiles" class="context-container"></div>
+        
+        <div id="messages"></div>
+        <div id="loading">AI is thinking...</div>
+        <div id="inputContainer">
+            <input id="messageInput" placeholder="Type your message..." />
+            <button id="sendButton" onclick="sendMessage()">Send</button>
+        </div>
+
+        <div id="agentsPanel" style="padding:12px;border-top:1px solid var(--vscode-editorGroup-border);">
+            <h4 style="margin:0 0 8px 0;font-size:13px;">File Context</h4>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+                <button onclick="uploadFiles('active')">📄 Add Active File</button>
+                <button onclick="uploadFiles('workspace')">📁 Add Workspace (first 200)</button>
+                <button onclick="clearContext()" style="background-color: var(--vscode-button-secondaryBackground);">🗑️ Clear Context</button>
+            </div>
+            <pre id="toolOutput" style="white-space:pre-wrap;max-height:160px;overflow:auto;padding:8px;border:1px solid var(--vscode-editorGroup-border);border-radius:6px;background:var(--vscode-input-background);color:var(--vscode-input-foreground);"></pre>
+
+            <h4 style="margin:12px 0 8px 0;font-size:13px;">Agent Tools</h4>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button onclick="invokeTool('listFiles')">List Files</button>
+                <button onclick="invokeTool('readActiveFile')">Show Active File</button>
+                <button onclick="invokeTool('searchTodos')">Search TODOs</button>
+                <button onclick="invokeTool('runNpmTest')">Run npm test</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="webview.js"></script>
+</body>
+</html>
